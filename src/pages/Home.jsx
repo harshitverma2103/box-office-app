@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { searchForShows, searchForPeople } from './../api/tvmaze';
 import SearchForm from '../Component/SearchForm';
-import ShowGrid from '../Component/shows/ShowGrid';
+import ShowGrid from '../Component/Shows/ShowGrid';
 import ActorsGrid from '../Component/actors/ActorsGrid';
 
 const Home = () => {
   const [filter, setFilter] = useState(null);
 
-  const {  data: apiData, error: apiDataError} = useQuery({
+  const { data: apiData, error: apiDataError } = useQuery({
     queryKey: ['search', filter],
     queryFn: () =>
       filter.searchOption === 'shows'
