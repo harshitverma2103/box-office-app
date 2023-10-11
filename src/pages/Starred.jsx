@@ -3,7 +3,6 @@ import { useStarredShows } from '../lib/useStarredShows';
 import ShowGrid from '../Component/Shows/ShowGrid';
 import { getShowsByIds } from '../api/tvmaze';
 
-
 const Starred = () => {
   const [starredShowsIds] = useStarredShows();
 
@@ -17,7 +16,7 @@ const Starred = () => {
   });
 
   if (starredShows?.length === 0) {
-    return <div> No show were starred</div>
+    return <div> No show were starred</div>;
   }
 
   if (starredShows?.length > 0) {
