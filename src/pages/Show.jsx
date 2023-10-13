@@ -5,6 +5,8 @@ import ShowMainData from '../Component/Shows/ShowMainData';
 import Details from '../Component/Shows/Details';
 import Season from '../Component/Shows/Season';
 import Cast from '../Component/Shows/Cast';
+import styled from 'styled-components';
+import { TextCenter } from '../Component/common/TextCenter';
 
 const Show = () => {
   const { showId } = useParams();
@@ -15,13 +17,15 @@ const Show = () => {
   });
 
   if (showError) {
-    return <div>We have an error: {showError.message}</div>;
+    return <TextCenter>We have an error: {showError.message}</TextCenter>;
   }
 
   if (showData) {
     return (
-      <div>
-        <Link to="/">Go back to home</Link>
+      <ShowPageWrapper>
+        <BackHomeWrapper>
+          <Link to="/">Go back to home</Link>
+        </BackHomeWrapper>
 
         <ShowMainData
           image={showData.image}
@@ -31,7 +35,7 @@ const Show = () => {
           genres={showData.genres}
         />
 
-        <div>
+        <InfoBlock>
           <h2>Details</h2>
 
           <Details
@@ -39,22 +43,54 @@ const Show = () => {
             premiered={showData.premiered}
             network={showData.network}
           />
-        </div>
+        </InfoBlock>
 
-        <div>
+        <InfoBlock>
           <h2>Seasons</h2>
           <Season seasons={showData._embedded.seasons} />
-        </div>
+        </InfoBlock>
 
-        <div>
+        <InfoBlock>
           <h2>Cast</h2>
           <Cast cast={showData._embedded.cast} />
-        </div>
-      </div>
+        </InfoBlock>
+      </ShowPageWrapper>
     );
   }
 
-  return <div>Data is loading</div>;
+  return <TextCenter>Data is loading</TextCenter>;
 };
 
 export default Show;
+
+const BackHomeWrapper = styled.div`
+  margin-bottom: 30px;
+  text-align: left;
+  a {
+    padding: 10px;
+    color: ${({ theme }) => theme.mainColors.dark};
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+const ShowPageWrapper = styled.div`
+  margin: auto;
+  @media only screen and (min-width: 768px) {
+    max-width: 700px;
+  }
+  @media only screen and (min-width: 992px) {
+    max-width: 900px;
+  }
+`;
+
+const InfoBlock = styled.div`
+  margin-bottom: 40px;
+  h2 {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 22px;
+  }
+`;
