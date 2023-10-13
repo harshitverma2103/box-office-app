@@ -28,7 +28,7 @@ const Starred = () => {
     return <TextCenter>Error occured: {starredShowsError.message}</TextCenter>;
   }
 
-  return <TextCenter>Shows are loading</TextCenter>
+  return <TextCenter>Shows are loading</TextCenter>;
 };
 
 export default Starred;
